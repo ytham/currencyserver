@@ -1,14 +1,37 @@
 class CurrenciesController < ApplicationController
+  respond_to :json
+  require 'net/http'
 
   def index
-    @currencies = Currency.all
+    #get_currencies
+    respond_with Currency.all
+  end
 
-    respond_to do |format|
-      format.html 
-      format.json { render json: @currencies }
+
+  def self.get_currencies
+    puts "Running self.get_currencies"
+    url = URI.parse("http://openexchangerates.org/api/latest.json?app_id=" + Rails.application.secrets.currency_api_key)
+    http = Net::HTTP.new(url.host, url.port)
+    req = Net::HTTP::Get.new(url.request_uri)
+    res = http.request(req)
+
+    data = JSON.parse(res.body)
+    rates = data["rates"]
+    rates.each do |code, value|
+      currency = Currency.find_by code: code
+      if currency != nil
+        puts "Found currency!!"
+        puts currency["country"]
+        currency.update_attributes(value: value)
+      end
+    end
+    #return data["rates"]
+  end
+
+  def self.get_last_refresh
+    Currency.each do |c|
+      puts c["updated_at"]
     end
   end
 
-  def get_currencies
-    http request: "http://openexchangerates.org/api/latest.json?app_id=" + secret.api_key
 end

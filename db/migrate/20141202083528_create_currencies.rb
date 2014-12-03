@@ -5,7 +5,6 @@ class CreateCurrencies < ActiveRecord::Migration
       t.string :code
       t.string :symbol
       t.decimal :value
-      t.datetime :last_updated
 
       t.timestamps
     end
