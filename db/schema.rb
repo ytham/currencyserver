@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20141202083528) do
     t.string   "code"
     t.string   "symbol"
     t.decimal  "value"
-    t.datetime "last_updated"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

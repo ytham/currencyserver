@@ -20,8 +20,8 @@ class CurrenciesController < ApplicationController
     rates.each do |code, value|
       currency = Currency.find_by code: code
       if currency != nil
-        puts "Found currency!!"
-        puts currency["country"]
+        # puts "Found currency!!"
+        # puts currency["country"]
         currency.update_attributes(value: value)
       end
     end
