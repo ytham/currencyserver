@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 4.hours do
-  puts "Running currency refresh"
-  runner "CurrenciesController.get_currencies"
-end
+# every 4.hours do
+#   puts "Running currency refresh"
+#   runner "CurrenciesController.get_currencies"
+# end
