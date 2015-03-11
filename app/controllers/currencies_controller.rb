@@ -9,6 +9,7 @@ class CurrenciesController < ApplicationController
 
 
   def self.get_currencies
+    System.out.println("Running self.get_currencies")
     puts "Running self.get_currencies"
     url = URI.parse("http://openexchangerates.org/api/latest.json?app_id=" + ENV["CURRENCY_API_KEY"])
     http = Net::HTTP.new(url.host, url.port)
